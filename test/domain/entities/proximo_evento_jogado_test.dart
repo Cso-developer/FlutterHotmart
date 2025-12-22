@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 class ProximoEventoJogador{
   final String id;
   final String nome;
+  late  String iniciais;// o larte diz para o compilador do dart que e gente sabe que etse campo é obrigatorio e iremos preenche-lo após a criação do objeto 
   final String? foto;
   final String? posicao;
   final bool confirmado ;
@@ -15,24 +16,28 @@ class ProximoEventoJogador{
     this.posicao,
     this.dataConfirmacao
 
-  });
+  }){
+    iniciais = _getIniciais();
+  }
 
-  String getIniciais(){
+
+
+  String _getIniciais(){
       final nomes = nome.split(' ');
       final letra1nome1= nomes.first[0];
-      final letra1Ultimonome = nomes.last[0];
-      return'${letra1nome1}${letra1Ultimonome}';
+      final letra1UltimoNome = nomes.last[0];
+      return'${letra1nome1}${letra1UltimoNome}';
   }
 
 }
+
+// escopo de teste
+
 void main(){
+  String iniciais (String nome)=> ProximoEventoJogador(id: "", nome: nome, confirmado: true).iniciais;
   test('Deve retornar a primeira letra  do primeiro e ultimo nome',() {
-    final jogador = ProximoEventoJogador(
-      id: "",
-      nome: "Cleverton Oliveira",
-      confirmado: true,
-    ); 
-    
-    expect(jogador.getIniciais(), 'CO');
+    // por convenção chamamos o objeto que etsá sendo testado de sut(system under test) 
+    expect(iniciais("Cleverton Oliveira"), 'CO');
+    expect(iniciais("Cleverton Oliveira Santos"), 'CS');
   });
 } 
