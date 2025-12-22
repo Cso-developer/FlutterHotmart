@@ -19,7 +19,9 @@ class ProximoEventoJogador{
 
   String getIniciais(){
       final nomes = nome.split(' ');
-      return'${nomes[0][0]}${nomes[1][0]}';
+      final letra1nome1= nomes.first[0];
+      final letra1Ultimonome = nomes.last[0];
+      return'${letra1nome1}${letra1Ultimonome}';
   }
 
 }
